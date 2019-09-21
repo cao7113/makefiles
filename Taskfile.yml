@@ -1,0 +1,37 @@
+# https://taskfile.dev
+# brew install go-task/tap/go-task
+# task -l
+
+version: '2'
+
+vars:
+  GREETING: Hello Taskfile from https://taskfile.dev
+
+tasks:
+  hello:
+    cmds:
+      - echo "{{.GREETING}}"
+    # silent: true  
+  
+  default: 
+    deps: [hello]
+
+  test-env1:
+    desc: test env var
+    cmds:
+      - export envVar1=test-var-value
+      # in different shell process
+      - echo envVar1=$envVar1
+      - unset envVar1
+      - echo envVar1=$envVar1
+    silent: true  
+
+  test-env2:
+    desc: test env in same shell
+    cmds:
+      - | # in same shell script
+        export envVar1=test-var-value
+        echo envVar1=$envVar1
+        unset envVar1
+        echo envVar1=$envVar1
+    silent: true
