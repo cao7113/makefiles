@@ -9,11 +9,13 @@ vars:
 
 tasks:
   hello:
+    desc: say hello to task tool
     cmds:
       - echo "{{.GREETING}}"
     # silent: true  
   
   default: 
+    desc: this is default task
     deps: [hello]
 
   test-env1:
