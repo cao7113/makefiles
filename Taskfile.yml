@@ -37,3 +37,24 @@ tasks:
         unset envVar1
         echo envVar1=$envVar1
     silent: true
+
+  main-task:
+    cmds:
+      # override 
+      - task: write-file
+        vars: {FILE: "hello.txt", CONTENT: "Hello!"}
+      - task: write-file
+        vars: {FILE: "world.txt", CONTENT: "World!"}
+
+  write-file:
+    cmds:
+      - echo "{{.CONTENT}}" > {{.FILE}}
+    # this part top on caller vars
+    # vars:
+    #   FILE: default-file.txt
+    #   CONTENT: test-content
+
+  ## var test
+  test-var-home:
+    cmds:
+    - echo "HOME={{.HOME}}"
